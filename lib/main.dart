@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app_flutter/screens/categories_meals_screen.dart';
 import 'package:meals_app_flutter/screens/categories_screen.dart';
 
 void main() => runApp(const MainApp());
@@ -9,21 +10,23 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Vamos Cozinhar?',
-      theme: ThemeData(
-          canvasColor: const Color.fromRGBO(255, 254, 229, 1),
-          fontFamily: 'Raleway',
-          textTheme: ThemeData.light().textTheme.copyWith(
-                titleLarge: const TextStyle(
-                  fontSize: 16,
-                  fontFamily: 'RobotoCondensed',
+        title: 'Vamos Cozinhar?',
+        theme: ThemeData(
+            canvasColor: const Color.fromRGBO(255, 254, 229, 1),
+            fontFamily: 'Raleway',
+            textTheme: ThemeData.light().textTheme.copyWith(
+                  titleLarge: const TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'RobotoCondensed',
+                  ),
                 ),
-              ),
-          colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.pink,
-          ).copyWith(secondary: Colors.amber)),
-      home: const CategoriesScreen(),
-    );
+            colorScheme: ColorScheme.fromSwatch(
+              primarySwatch: Colors.pink,
+            ).copyWith(secondary: Colors.amber)),
+        home: const CategoriesScreen(),
+        routes: {
+          '/categories-meals': (ctx) => CategoriesMealsScreen(),
+        });
   }
 }
 
