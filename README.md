@@ -1,8 +1,14 @@
-## Meals
+##Meals
 is a mobile application built using the _Flutter framework for developing
 cross-platform apps_. The app provides users with a vast collection of meal
 recipes, including breakfast, lunch, dinner, and snacks.
-
+<div>
+<p>
+  <img src="https://github.com/LeonardoJaques/meals_app_flutter/assets/28495699/926ff711-48a4-4513-a427-f68d5bd91673" width="20%" />
+  <img src="https://github.com/LeonardoJaques/meals_app_flutter/assets/28495699/3558aba1-1e05-47c8-a9e0-8541498cb804" width="20%" /> 
+  <img src="https://github.com/LeonardoJaques/meals_app_flutter/assets/28495699/a10f3e81-0855-4f36-8b00-9985c786ef22" width="20%" /> 
+</p>
+</div> 
 
 The app's user interface is sleek and intuitive, making it easy for users to
 navigate through the different sections of the app. Users can browse through the
