@@ -4,7 +4,7 @@ import 'package:meals_app_flutter/models/settings.dart';
 
 class SettingsScreen extends StatefulWidget {
   final Function(Settings) onSettingsChanged;
-  const SettingsScreen({super.key, required this.onSettingsChanged});
+  const SettingsScreen(this.onSettingsChanged, {super.key});
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();

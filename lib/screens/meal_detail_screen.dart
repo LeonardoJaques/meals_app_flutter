@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:meals_app_flutter/models/meal.dart';
 
 class MealDetailScreen extends StatelessWidget {
-  const MealDetailScreen({super.key});
+  const MealDetailScreen(this.onToggleFavorite, this.isFavorite, {super.key});
+  final Function(Meal) onToggleFavorite;
+  final bool Function(Meal) isFavorite;
 
   _createSectionTitle(BuildContext context, String title) {
     return Container(
@@ -36,63 +38,61 @@ class MealDetailScreen extends StatelessWidget {
     final meal = ModalRoute.of(context)?.settings.arguments as Meal;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(meal.title),
-        ),
-        body: SingleChildScrollView(
-          child: Column(children: [
-            SizedBox(
-              height: 200,
-              width: double.infinity,
-              child: Image.network(
-                meal.imageUrl,
-                fit: BoxFit.cover,
-              ),
+      appBar: AppBar(
+        title: Text(meal.title),
+      ),
+      body: SingleChildScrollView(
+        child: Column(children: [
+          SizedBox(
+            height: 200,
+            width: double.infinity,
+            child: Image.network(
+              meal.imageUrl,
+              fit: BoxFit.cover,
             ),
-            _createSectionTitle(context, 'Ingredientes'),
-            _createSectionContainer(
-              ListView.builder(
-                itemCount: meal.ingredients.length,
-                itemBuilder: (ctx, index) {
-                  return Card(
-                    color: Theme.of(context).colorScheme.secondary,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 5,
-                        horizontal: 10,
-                      ),
-                      child: Text(meal.ingredients[index]),
-                    ),
-                  );
-                },
-              ),
-            ),
-            _createSectionTitle(context, 'Passos'),
-            _createSectionContainer(ListView.builder(
-              itemCount: meal.steps.length,
+          ),
+          _createSectionTitle(context, 'Ingredientes'),
+          _createSectionContainer(
+            ListView.builder(
+              itemCount: meal.ingredients.length,
               itemBuilder: (ctx, index) {
-                return Column(
-                  children: [
-                    ListTile(
-                      leading: CircleAvatar(
-                        child: Text('${index + 1}'),
-                      ),
-                      title: Text(meal.steps[index]),
+                return Card(
+                  color: Theme.of(context).colorScheme.secondary,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 5,
+                      horizontal: 10,
                     ),
-                    const Divider(
-                      color: Colors.black54,
-                    ),
-                  ],
+                    child: Text(meal.ingredients[index]),
+                  ),
                 );
               },
-            ))
-          ]),
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.star),
-          onPressed: () {
-            Navigator.of(context).pop(meal.title);
-          },
-        ));
+            ),
+          ),
+          _createSectionTitle(context, 'Passos'),
+          _createSectionContainer(ListView.builder(
+            itemCount: meal.steps.length,
+            itemBuilder: (ctx, index) {
+              return Column(
+                children: [
+                  ListTile(
+                    leading: CircleAvatar(
+                      child: Text('${index + 1}'),
+                    ),
+                    title: Text(meal.steps[index]),
+                  ),
+                  const Divider(
+                    color: Colors.black54,
+                  ),
+                ],
+              );
+            },
+          ))
+        ]),
+      ),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(isFavorite(meal) ? Icons.star : Icons.star_border),
+          onPressed: () => onToggleFavorite(meal)),
+    );
   }
 }
