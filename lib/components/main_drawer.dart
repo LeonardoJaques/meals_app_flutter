@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../utils/app_routes.dart';
+
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Widget _createItem(IconData icon, String label) {
+    Widget _createItem(IconData icon, String label, Function() onTap) {
       return ListTile(
         leading: Icon(icon, size: 26),
         title: Text(label,
@@ -14,7 +16,7 @@ class MainDrawer extends StatelessWidget {
               fontSize: 24,
               fontWeight: FontWeight.bold,
             )),
-        onTap: () {},
+        onTap: onTap,
       );
     }
 
@@ -24,19 +26,24 @@ class MainDrawer extends StatelessWidget {
           Container(
             height: 120,
             width: double.infinity,
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12.5),
             color: Theme.of(context).colorScheme.secondary,
             alignment: Alignment.bottomCenter,
             child: Text('Vamos cozinhar?',
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
-                  fontSize: 30,
+                  fontSize: 25,
                   color: Theme.of(context).colorScheme.primary,
                 )),
           ),
           const SizedBox(height: 20),
-          _createItem(Icons.restaurant, 'Refeições'),
-          _createItem(Icons.settings, 'Configurações'),
+          _createItem(Icons.restaurant, 'Refeições',
+              () => Navigator.of(context).pushReplacementNamed(AppRoutes.HOME)),
+          _createItem(
+              Icons.settings,
+              'Configurações',
+              () => Navigator.of(context)
+                  .pushReplacementNamed(AppRoutes.SETTINGS)),
         ],
       ),
     );
